@@ -1,0 +1,1 @@
+no_self_assignment_rule.rb
