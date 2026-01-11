@@ -1,5 +1,7 @@
 module SecretSanta
   module Models
+    class InvalidAssignmentError < StandardError; end
+
     class Assignment
       attr_reader :giver, :receiver
 
@@ -16,11 +18,16 @@ module SecretSanta
       private
 
       def validate!
-        raise ArgumentError, "Giver must be an Employee" unless giver.is_a?(Employee)
-        raise ArgumentError, "Receiver must be an Employee" unless receiver.is_a?(Employee)
+        unless giver.is_a?(Employee)
+          raise InvalidAssignmentError, "Giver must be an Employee"
+        end
+
+        unless receiver.is_a?(Employee)
+          raise InvalidAssignmentError, "Receiver must be an Employee"
+        end
 
         if giver == receiver
-          raise ArgumentError, "Employee cannot be assigned to themselves"
+          raise InvalidAssignmentError, "Employee cannot be assigned to themselves"
         end
       end
     end
