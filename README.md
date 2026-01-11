@@ -34,6 +34,16 @@ app/
 * **assignment_engine.rb**: Orchestrates rule evaluation and assignment logic
 * **generator.rb**: Coordinates the overall Secret Santa generation process
 
+## Requirements
+
+* **Ruby**: 3.1 or higher
+* **Rails**: 7.x
+* **Bundler**: Latest stable version
+
+This task is implemented as a **Rails Rake task** and must be executed within a Rails application context.
+
+---
+
 ## Usage Examples
 
 ### With multiple previous years CSV files
