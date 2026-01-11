@@ -1,24 +1,62 @@
-# README
+## File Structure
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```text
+lib/
+├── csv/
+│   ├── reader.rb
+│   └── writer.rb
+│
+├── tasks/
+│   └── secret_santa.rake
 
-Things you may want to cover:
+app/
+└── services/
+    └── secret_santa/
+        ├── models/
+        │   ├── assignment.rb
+        │   └── employee.rb
+        │
+        ├── rules/
+        │   ├── base_rule.rb
+        │   ├── no_previous_year_rule.rb
+        │   └── no_self_assignment_rule.rb
+        │
+        ├── assignment_engine.rb
+        └── generator.rb
+```
 
-* Ruby version
+### Overview
 
-* System dependencies
+* **lib/csv/**: CSV input/output handling
+* **lib/tasks/**: Rake task entry point
+* **models/**: Core domain objects
+* **rules/**: Business rules for assignment validation
+* **assignment_engine.rb**: Orchestrates rule evaluation and assignment logic
+* **generator.rb**: Coordinates the overall Secret Santa generation process
 
-* Configuration
+## Usage Examples
 
-* Database creation
+### With multiple previous years CSV files
 
-* Database initialization
+```bash
+bin/rails secret_santa:generate[employees.csv,output.csv,prev_24.csv,prev_25.csv]
+```
 
-* How to run the test suite
+### With one previous year CSV file
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bin/rails secret_santa:generate[employees.csv,output.csv,prev25.csv]
+```
 
-* Deployment instructions
+### With no previous year CSV file
 
-* ...
+```bash
+bin/rails secret_santa:generate[employees.csv,output.csv]
+```
+
+### Notes
+
+* `employees.csv` → Current year employee list
+* `output.csv` → Generated Secret Santa assignments
+* `prev_*.csv` → One or more previous year assignment files (optional)
+* You can pass **zero, one, or multiple** previous-year CSV files
