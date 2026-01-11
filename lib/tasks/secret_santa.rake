@@ -34,12 +34,10 @@ namespace :secret_santa do
     end
 
     begin
-      SecretSanta::Generator.call(
-        employees_csv: employees_csv,
-        previous_csvs: previous_csv_files,   # note plural for multiple CSVs
-        output_csv: output_csv
-      )
-
+      employees = Csv::Reader.read_employees(employees_csv)
+      previous_assignments = Csv::Reader.read_assignments(previous_csv_files)
+      generator = SecretSanta::Generator.new(employees: employees, previous_assignments: previous_assignments, reader: Csv::Reader, writer: Csv::Writer)
+      generator.run(output_path: output_csv)
       puts "Secret Santa assignments generated successfully!"
       puts "Output CSV: #{output_csv}"
     rescue StandardError => e

@@ -1,6 +1,6 @@
 require 'csv'
 
-module CSV
+module Csv
   class Writer
     HEADERS = ['Employee_Name', 'Employee_EmailID','Secret_Child_Name','Secret_Child_EmailID'].freeze
 
