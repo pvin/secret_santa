@@ -49,19 +49,26 @@ This task is implemented as a **Rails Rake task** and must be executed within a 
 ### With multiple previous years CSV files
 
 ```bash
-bin/rails secret_santa:generate[employees.csv,output.csv,prev_24.csv,prev_25.csv]
+EMPLOYEES=employees.csv \
+OUTPUT=output.csv \
+PREVIOUS=prev_24.csv,prev_25.csv \
+bin/rails secret_santa:generate
 ```
 
 ### With one previous year CSV file
 
 ```bash
-bin/rails secret_santa:generate[employees.csv,output.csv,prev25.csv]
+EMPLOYEES=employees.csv \
+OUTPUT=output.csv \
+PREVIOUS=prev_24.csv \
+bin/rails secret_santa:generate
 ```
 
 ### With no previous year CSV file
 
 ```bash
-bin/rails secret_santa:generate[employees.csv,output.csv]
+EMPLOYEES=employees.csv OUTPUT=output.csv \
+bin/rails secret_santa:generate
 ```
 
 ### Notes
